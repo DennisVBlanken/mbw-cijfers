@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the application version and other info.
+     */
+    public function about()
+    {
+        return view('about');
+    }
 }
