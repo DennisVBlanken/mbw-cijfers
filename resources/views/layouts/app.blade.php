@@ -34,11 +34,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @guest
+                        @else
+                        @if(Auth::user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('addStudent') }}">{{ __('Student Toevoegen') }}</a>
+                            </li>
+                        @endif
+                        @endguest
+                        @guest
+                        @else
+                        @if(Auth::user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('vak.create') }}">{{ __('Vak toevoegen') }}</a>
+                            </li>
+                        @endif
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('about') }}">{{ __('About') }}</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -69,6 +87,21 @@
         </nav>
 
         <main class="py-4">
+        @if ($errors->any())
+    	    <div class="alert alert-danger">
+    	        <ul>
+    	            @foreach ($errors->all() as $error)
+    	                <li>{{ $error }}</li>
+    	            @endforeach
+    	        </ul>
+    	    </div>
+        @endif
+
+        @if (session('message'))
+            <div class="alert alert-success">
+                <p>{{session('message')}}</p>
+            </div>
+        @endif
             @yield('content')
         </main>
     </div>
