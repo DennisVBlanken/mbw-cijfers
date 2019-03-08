@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
 
 Route::get('/group', 'GroupController@index')->middleware('checkAdmin');
 Route::get('/group/{id}', 'GroupController@show')->name('group.show')->middleware('checkAdmin');
